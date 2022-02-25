@@ -27,7 +27,95 @@
         <spring.boot.version>2.6.3</spring.boot.version>
         <lombok.version>1.18.22</lombok.version>
         <mapstrct.version>1.4.2.Final</mapstrct.version>
+        <jaxb.version>3.0.1</jaxb.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- child modules -->
+            <dependency>
+                <groupId>com.abstractkamen</groupId>
+                <artifactId>entities-jpa</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.abstractkamen</groupId>
+                <artifactId>entity-mapper-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.abstractkamen</groupId>
+                <artifactId>xsd-web-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.abstractkamen</groupId>
+                <artifactId>spring-data-jpa-persistence</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.abstractkamen</groupId>
+                <artifactId>mapstrct-entity-mapper-impl</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- MapStruct -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstrct.version}</version>
+            </dependency>
+            <!-- JaxB -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.4.0-b180830.0359</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>5.3.15</version>
+            </dependency>
+            <!-- JPA -->
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
+                <version>2.2</version>
+            </dependency>
+            <!-- H2 -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>2.1.210</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <packaging>pom</packaging>
     <build>
