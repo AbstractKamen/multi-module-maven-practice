@@ -22,7 +22,7 @@ public class Main {
         userCommand.setEmail("puttingus@gus.com");
         userCommand.setFirstName("VladimirGus");
         userCommand.setLastName("PutinGus");
-        final ConfigurableApplicationContext context = SpringApplication.run(Main.class);
+        final ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
         context.getBean(UserController.class).saveUser(userCommand);
         context.getBean(UserRepository.class).findAll().forEach(System.out::println);
 

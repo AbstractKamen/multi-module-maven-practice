@@ -26,6 +26,12 @@ public class UserController {
         return ResponseEntity.ok("User controller is working...");
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<User> getUser(@PathVariable String id) {
+        final User user = userRepository.findById(Long.parseLong(id)).orElseThrow(RuntimeException::new);
+        return ResponseEntity.ok(user);
+    }
+
     @PostMapping("/save")
     public ResponseEntity<User> saveUser(@RequestBody UserCommand userCommand) {
         final User user = userMapper.fromDto(userCommand);
