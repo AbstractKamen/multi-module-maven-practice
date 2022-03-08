@@ -28,8 +28,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
         <mapstrct.version>1.4.2.Final</mapstrct.version>
         <jaxb.version>3.0.1</jaxb.version>
         <project.scm.id>github</project.scm.id>
