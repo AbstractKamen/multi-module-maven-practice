@@ -140,14 +140,71 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Release -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <releaseProfiles>nexus-release</releaseProfiles>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+    <scm>
+        <developerConnection>scm:git:https://github.com/AbstractKamen/multi-module-maven-practice.git</developerConnection>
+        <url>https://github.com/AbstractKamen/multi-module-maven-practice</url>
+    </scm>
+    <profiles>
+        <profile>
+            <id>nexus-snapshot</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>nexus-snapshot</id>
+                    <name>My local nexus snapshots</name>
+                    <url>http://localhost:8081/repository/test-nexus-snapshot/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>nexus-release</id>
+            <distributionManagement>
+                <repository>
+                    <id>nexus-release</id>
+                    <name>My local nexus releases</name>
+                    <url>http://localhost:8081/repository/test-nexus-release/</url>
+                </repository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.3</version>
+                        <executions>
+                            <execution>
+                                <id>default-deploy</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <serverId>test-nexus-release</serverId>
+                            <nexusUrl>http://localhost:8081/repository/</nexusUrl>
+                            <skipStaging>true</skipStaging>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <!-- 'setting.xml' must be configured to point to a running nexus instance. -->
+    <!-- This can be setup with profiles. However, having two profiles with 'distributionManagement'
+     active at the same time is bad practice as there is no guarantee which profile will be chosen
+     for the 'deploy' phase -->
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>github</id>
-            <name>GitHub AbstractKamen Apache Maven Packages Snapshots</name>
-            <url>https://maven.pkg.github.com/AbstractKamen/multi-module-maven-practice/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
