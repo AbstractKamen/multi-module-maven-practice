@@ -140,17 +140,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Release -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <tagNameFormat>v@{project.version}</tagNameFormat>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <releaseProfiles>nexus-release</releaseProfiles>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
     <scm>
@@ -160,6 +149,10 @@
     <profiles>
         <profile>
             <id>nexus-snapshot</id>
+            <!-- 'setting.xml' must be configured to point to a running nexus instance. -->
+            <!-- This can be setup with profiles. However, having two profiles with 'distributionManagement'
+             active at the same time is bad practice as there is no guarantee which profile will be chosen
+             for the 'deploy' phase -->
             <distributionManagement>
                 <snapshotRepository>
                     <id>nexus-snapshot</id>
@@ -169,42 +162,31 @@
             </distributionManagement>
         </profile>
         <profile>
-            <id>nexus-release</id>
+            <id>github</id>
+            <!-- 'setting.xml' must be configured with GitHub credentials. -->
             <distributionManagement>
                 <repository>
-                    <id>nexus-release</id>
+                    <id>github</id>
                     <name>My local nexus releases</name>
                     <url>http://localhost:8081/repository/test-nexus-release/</url>
                 </repository>
             </distributionManagement>
             <build>
                 <plugins>
+                    <!-- Release -->
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.3</version>
-                        <executions>
-                            <execution>
-                                <id>default-deploy</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>3.0.0-M5</version>
                         <configuration>
-                            <serverId>test-nexus-release</serverId>
-                            <nexusUrl>http://localhost:8081/repository/</nexusUrl>
-                            <skipStaging>true</skipStaging>
+                            <tagNameFormat>v@{project.version}</tagNameFormat>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                            <releaseProfiles>nexus-release</releaseProfiles>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
-    <!-- 'setting.xml' must be configured to point to a running nexus instance. -->
-    <!-- This can be setup with profiles. However, having two profiles with 'distributionManagement'
-     active at the same time is bad practice as there is no guarantee which profile will be chosen
-     for the 'deploy' phase -->
 
 </project>
