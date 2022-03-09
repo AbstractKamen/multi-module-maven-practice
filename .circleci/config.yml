@@ -8,28 +8,23 @@ jobs:
     steps:
       - checkout
       - run: mvn -Dmaven.test.skip=true package
-      - persist_to_workspace:
-          root: .
+      - save_cache:
           paths:
-            - ./target
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
   # Unit Test
   test:
     docker:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
-      - attach_workspace:
-          at: ./target
+  - restore_cache:
+      keys:
+        - v1-dependencies-{{ checksum "pom.xml" }}
+        - v1-dependencies-
+      - run: mvn -Dmaven.test.skip=true package
       - run: mvn test
-  # Integration Test
-  integration-test:
-    docker:
-      - image: cimg/openjdk:11.0
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ./target
-      - run: mvn integration-test
+      - run: integration-test
   # Deploy
   deploy-snapshot:
     docker:
@@ -47,9 +42,6 @@ workflows:
       - test:
           requires:
             - build
-      - integration-test:
-          requires:
-            - test
       - deploy-snapshot:
           requires:
-            - integration-test
+            - test
