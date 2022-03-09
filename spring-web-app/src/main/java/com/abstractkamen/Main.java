@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 })
 @EntityScan(value = "com.abstractkamen.entities")
 public class Main {
+
     public static void main(String[] args) {
         UserCommand userCommand = new UserCommand();
         userCommand.setEmail("puttingus@gus.com");
