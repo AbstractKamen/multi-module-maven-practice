@@ -7,11 +7,11 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
-      - run: mvn -Dmaven.test.skip=true package
       - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+            paths:
+              - ~/.m2
+            key: v1-dependencies-{{ checksum "pom.xml" }}
+      - run: mvn -Dmaven.test.skip=true package
   # Unit Test
   test:
     docker:
