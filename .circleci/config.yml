@@ -7,11 +7,11 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
-      - run: mvn -Dmaven.test.skip=true package
       - persist_to_workspace:
-          root: ./
-          paths:
-            - target/
+            root: ./
+            paths:
+              - target/
+      - run: mvn -Dmaven.test.skip=true package
   # Unit Test
   test:
     docker:
