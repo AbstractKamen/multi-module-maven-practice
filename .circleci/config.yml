@@ -24,7 +24,7 @@ jobs:
         - v1-dependencies-
       - run: mvn -Dmaven.test.skip=true package
       - run: mvn test
-      - run: integration-test
+      - run: mvn integration-test
   # Deploy
   deploy-snapshot:
     docker:
