@@ -10,7 +10,7 @@ jobs:
       - persist_to_workspace:
             root: .
             paths:
-              - target/
+              - ./target
       - run: mvn -Dmaven.test.skip=true package
   # Unit Test
   test:
