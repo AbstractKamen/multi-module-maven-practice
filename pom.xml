@@ -107,6 +107,13 @@
                 <artifactId>h2</artifactId>
                 <version>2.1.210</version>
             </dependency>
+            <!-- TestNg -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>RELEASE</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
