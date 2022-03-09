@@ -158,6 +158,11 @@
                 <updatePolicy>daily</updatePolicy>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
     </repositories>
     <distributionManagement>
         <snapshotRepository>
