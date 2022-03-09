@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+       
+<settings xmlns="http://maven.apache.org/settings/1.0.0"    
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
+              xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<servers>
+		<server>
+			<id>nexus-snapshot</id>
+			<username>${env.NEXUS_USERNAME}</username>
+			<password>${env.NEXUS_PASSWORD}</password>
+			<password>{WDuve2j+6gAHh3OIlPlprVk5fYXJXVytV0X46MSW0rc=}</password>
+		</server>
+		<server>
+			<id>nexus-release</id>
+			<username>${env.NEXUS_USERNAME}</username>
+			<password>{WDuve2j+6gAHh3OIlPlprVk5fYXJXVytV0X46MSW0rc=}</password>
+		</server>
+	</servers>
+</settings>  
